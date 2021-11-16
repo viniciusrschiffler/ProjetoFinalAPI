@@ -38,7 +38,7 @@ public class Endereco {
 	@Column(nullable = true, length = 30)
 	private String cidade;
 	
-	//@NotBlank(message = "Prencher numero")
+	@NotBlank(message = "Prencher numero")
 	@Column(nullable = false)
 	private Integer numero;
 	
@@ -176,12 +176,6 @@ public class Endereco {
 				&& Objects.equals(cidade, other.cidade) && Objects.equals(complemento, other.complemento)
 				&& Objects.equals(estado, other.estado) && Objects.equals(id, other.id)
 				&& Objects.equals(numero, other.numero) && Objects.equals(rua, other.rua);
-	}
-
-
-	public static boolean isPresent() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 	
 	

@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -21,7 +22,7 @@ public class Cliente {
 	@Column(name = "id_cliente")
 	private Long id;
 	
-	@NotBlank(message = "Prencher email")
+	@Email(message = "Prencher email")
 	@Size(max = 30)
 	@Column(nullable = false, length = 30)
 	private String email;
@@ -51,7 +52,7 @@ public class Cliente {
 	@Column(nullable = true, length = 11)
 	private String telefone;
 	
-	@NotBlank(message = "Prencher data de nascimento")
+	//@NotBlank(message = "Prencher data de nascimento")
 	@Column(nullable = true, name = "data_nasc")
 	private LocalDate dataNascimento;
 	
