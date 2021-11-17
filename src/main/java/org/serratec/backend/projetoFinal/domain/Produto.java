@@ -31,14 +31,12 @@ public class Produto {
 	@Column(nullable = true, length = 100)
 	private String descricao;
 	
-	@NotBlank(message = "Prencher quantidade em estoque")
 	@Column(nullable = false, name = "qtd_estoque")
 	private Integer qtdEstoque;
 	
 	@Column(nullable = true, name = "data_cadastro")
 	private LocalDate dataCadastro;
 	
-	@NotBlank(message = "Prencher valor unitario")
 	@Column(nullable = false, name = "valor_unitario")
 	private Float valorUnitario;
 	
@@ -47,16 +45,22 @@ public class Produto {
 	
 	@OneToOne
 	@JoinColumn(name = "id_categoria")
-//	@Column(name = "id_categoria")
 	private Categoria categoria;
 
 	public Produto() {
 		super();
 	}
+	
+	
+	public Produto(Long id) {
+		super();
+		this.id = id;
+	}
+
 
 	public Produto(Long id, @NotBlank(message = "Prencher nome") @Size(max = 30) String nome,
-			@Size(max = 100) String descricao, @NotBlank(message = "Prencher quantidade em estoque") Integer qtdEstoque,
-			LocalDate dataCadastro, @NotBlank(message = "Prencher valor unitario") Float valorUnitario, byte[] imagem,
+			@Size(max = 100) String descricao,Integer qtdEstoque,
+			LocalDate dataCadastro, Float valorUnitario, byte[] imagem,
 			Categoria categoria) {
 		super();
 		this.id = id;
@@ -125,11 +129,11 @@ public class Produto {
 		this.imagem = imagem;
 	}
 
-	public Categoria getProduto() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setProduto(Categoria categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 

@@ -63,6 +63,15 @@ public class Cliente {
 	public Cliente() {
 		super();
 	}
+	
+	
+
+	public Cliente(Long id) {
+		super();
+		this.id = id;
+	}
+
+
 
 	public Cliente(Long id, @NotBlank(message = "Prencher email") @Size(max = 30) String email,
 			@NotBlank(message = "Prencher nome do usuario ") @Size(max = 20) String nomeUsuario,

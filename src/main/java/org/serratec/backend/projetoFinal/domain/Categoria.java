@@ -18,12 +18,10 @@ public class Categoria {
 	@Column(name = "id_categoria")
 	private Long id;
 	
-	@NotBlank(message = "Prencher nome")
 	@Size(max = 30)
 	@Column(nullable = true, length = 30)
 	private String nome;
 	
-	@NotBlank(message = "Prencher descrição")
 	@Size(max = 150)
 	@Column(nullable = true, length = 150)
 	private String descricao;
@@ -31,6 +29,14 @@ public class Categoria {
 	public Categoria() {
 		super();
 	}
+	
+	
+
+	public Categoria(Long id) {
+		this.id = id;
+	}
+
+
 
 	public Categoria(Long id, @NotBlank(message = "Prencher nome") @Size(max = 30) String nome,
 			@NotBlank(message = "Prencher descrição") @Size(max = 150) String descricao) {

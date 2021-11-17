@@ -30,7 +30,6 @@ public class Pedido {
 	@Column(nullable = true, name = "data_envio")
 	private LocalDate dataEnvio;
 	
-	@NotBlank(message = "Prencher status")
 	@Size(max = 20)
 	@Column(nullable = true, length = 20)
 	private String status;
@@ -44,6 +43,15 @@ public class Pedido {
 	public Pedido() {
 		super();
 	}
+	
+	
+
+	public Pedido(Long id) {
+		super();
+		this.id = id;
+	}
+
+
 
 	public Pedido(Long id, @NotBlank(message = "Prencher data do pedido") LocalDate dataPedido,
 			@NotBlank(message = "Prencher data de entrega") LocalDate dataEntrega,

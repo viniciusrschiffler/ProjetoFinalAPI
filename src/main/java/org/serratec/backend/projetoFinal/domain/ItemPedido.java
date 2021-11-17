@@ -21,12 +21,10 @@ public class ItemPedido {
 	@Column(name = "id_item_pedido")
 	private Long id;
 	
-	@NotBlank(message = "Prencher quantidade")
 	@Column(nullable = false)
 	private Integer quantidade;
 	
 	
-	@NotBlank(message = "Prencher nome")
 	@Column(nullable = false)
 	private Integer precoVenda;
 	
