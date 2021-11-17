@@ -1,9 +1,9 @@
-package org.serratec.backend.projetoFinal.Controller;
+package org.serratec.backend.projetoFinal.controller;
 
 import java.util.List;
 import java.util.Optional;
 
-import org.serratec.backend.projetoFinal.Repository.PedidoRepository;
+import org.serratec.backend.projetoFinal.repository.PedidoRepository;
 import org.serratec.backend.projetoFinal.domain.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -37,7 +37,7 @@ public class Cliente {
 	@Column(nullable = false, length = 60, name = "nome_completo")
 	private String nomeCompleto;
 	
-	@NotBlank(message = "Prencher senha")
+	//@NotBlank(message = "Prencher senha")
 	@Size(max = 255)
 	@Column(nullable = true, length = 255)
 	private String senha;
@@ -47,7 +47,7 @@ public class Cliente {
 	@Column(nullable = false, length = 14)
 	private String cpf;
 	
-	@NotBlank(message = "Prencher telefone")
+	//@NotBlank(message = "Prencher telefone")
 	@Size(max = 11)
 	@Column(nullable = true, length = 11)
 	private String telefone;
@@ -58,15 +58,11 @@ public class Cliente {
 	
 	@OneToOne
 	@JoinColumn(name = "id_endereco")
-//	@Column(name = "id_endereco")
 	private Endereco endereco;
 
 	public Cliente() {
 		super();
 	}
-
-	
-	
 
 	public Cliente(Long id, @NotBlank(message = "Prencher email") @Size(max = 30) String email,
 			@NotBlank(message = "Prencher nome do usuario ") @Size(max = 20) String nomeUsuario,

@@ -21,15 +21,12 @@ public class Pedido {
 	@Column(name = "id_pedido")
 	private Long id;
 	
-	@NotBlank(message = "Prencher data do pedido")
 	@Column(nullable = false, name = "data_pedido")
 	private LocalDate dataPedido;
 	
-	@NotBlank(message = "Prencher data de entrega")
 	@Column(nullable = true, name = "data_entrega")
 	private LocalDate dataEntrega ;
 	
-	@NotBlank(message = "Prencher data de envio")
 	@Column(nullable = true, name = "data_envio")
 	private LocalDate dataEnvio;
 	

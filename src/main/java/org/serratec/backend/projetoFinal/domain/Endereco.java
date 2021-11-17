@@ -33,21 +33,17 @@ public class Endereco {
 	@Column(nullable = false, length = 50)
 	private String bairro;
 	
-	@NotBlank(message = "Prencher cidade")
 	@Size(max = 30)
 	@Column(nullable = true, length = 30)
 	private String cidade;
 	
-	@NotBlank(message = "Prencher numero")
 	@Column(nullable = false)
 	private Integer numero;
 	
-	@NotBlank(message = "Prencher complemento")
 	@Size(max = 20)
 	@Column(nullable = true, length = 20)
 	private String complemento;
 	
-	@NotBlank(message = "Prencher estado")
 	@Size(max = 2)
 	@Column(nullable = true, length = 2)
 	private String estado;
@@ -55,6 +51,11 @@ public class Endereco {
 	
 	public Endereco() {
 		super();
+	}
+
+
+	public Endereco(Long id) {
+		this.id = id;
 	}
 
 
