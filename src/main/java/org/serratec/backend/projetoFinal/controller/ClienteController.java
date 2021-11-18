@@ -28,12 +28,12 @@ public class ClienteController {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
-	@GetMapping
+	@GetMapping("/todos")
 	public List<Cliente> listar(){
 		return clienteRepository.findAll();
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/listar/{id}")
 	public ResponseEntity<Cliente> buscarCliente(@PathVariable Long id){
 		Optional<Cliente> cliente = clienteRepository.findById(id);
 		if(cliente.isPresent()) {
@@ -43,14 +43,14 @@ public class ClienteController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping
+	@PostMapping("/cadastrar")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente inserir( @Valid @RequestBody Cliente cliente){
 		clienteRepository.save(cliente);
 		return cliente;
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("/atualizar/{id}")
 	public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @Valid @RequestBody Cliente cliente){
 			Optional<Cliente> cliente1 = clienteRepository.findById(id);
 			if(cliente1.isPresent()) {
@@ -86,7 +86,7 @@ public class ClienteController {
 		return ResponseEntity.ok(clienteRepository.save(cliente1.get()));
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/deletar/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
 		
 		if(!clienteRepository.existsById(id)) {

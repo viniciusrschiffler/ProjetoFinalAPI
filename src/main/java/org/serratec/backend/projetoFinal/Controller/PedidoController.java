@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 	@RestController
-	@RequestMapping("/Pedido")
+	@RequestMapping("/pedido")
 	public class PedidoController {
 	
 		@Autowired
 		private PedidoRepository pedidoRepository;
 		
-		@GetMapping()
+		@GetMapping("/todos")
 		public ResponseEntity<List<Pedido>> listarTodos() {
 			
 			Optional<List<Pedido>> pedido = Optional.ofNullable(pedidoRepository.findAll());
@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 			return ResponseEntity.notFound().build();
 		}
 		
-		@GetMapping("/{id}")
+		@GetMapping("/listar/{id}")
 		public ResponseEntity<Pedido> listar(@PathVariable Long id) {
 			
 			Optional<Pedido> pedido = pedidoRepository.findById(id);
@@ -47,14 +47,14 @@ import org.springframework.web.bind.annotation.RestController;
 			return ResponseEntity.notFound().build();
 		}
 		
-		@PostMapping
+		@PostMapping("/cadastrar")
 		public ResponseEntity<Void> cadastrarPedido(@RequestBody Pedido pedido) {
 			
 			pedidoRepository.save(pedido);
 			return ResponseEntity.status(201).build();
 		}
 		
-		@PutMapping("/{id}")
+		@PutMapping("/atualizar/{id}")
 		public ResponseEntity<Pedido> atualizar(@PathVariable Long id, @RequestBody Pedido dadosPedido) {
 			
 			Optional<Pedido> pedido = pedidoRepository.findById(id);
@@ -68,7 +68,7 @@ import org.springframework.web.bind.annotation.RestController;
 			
 		}
 		
-		@DeleteMapping("/{id}")
+		@DeleteMapping("/deletar/{id}")
 		public ResponseEntity<Void> deletar(@PathVariable Long id) {
 			
 			if (!pedidoRepository.existsById(id)) {

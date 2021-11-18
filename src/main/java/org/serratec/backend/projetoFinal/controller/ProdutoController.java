@@ -24,7 +24,7 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	
-	@GetMapping()
+	@GetMapping("/todos")
 	public ResponseEntity<List<Produto>> listarTodos() {
 		
 		Optional<List<Produto>> produto = Optional.ofNullable(produtoRepository.findAll());
@@ -36,7 +36,7 @@ public class ProdutoController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/listar/{id}")
 	public ResponseEntity<Produto> listar(@PathVariable Long id) {
 		
 		Optional<Produto> produto = produtoRepository.findById(id);
@@ -55,7 +55,7 @@ public class ProdutoController {
 		return ResponseEntity.status(201).build();
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("/cadastrar/{id}")
 	public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody Produto dadosProduto) {
 		
 		Optional<Produto> produto = produtoRepository.findById(id);
@@ -69,7 +69,7 @@ public class ProdutoController {
 		
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/deletar/atualizar/{id}")
 	public ResponseEntity<Void> deletar(@PathVariable Long id) {
 		
 		if (!produtoRepository.existsById(id)) {

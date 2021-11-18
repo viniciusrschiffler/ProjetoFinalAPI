@@ -23,7 +23,7 @@ public class EnderecoController {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	
-	@GetMapping()
+	@GetMapping("/todos")
 	public ResponseEntity<List<Endereco>> listarTodos() {
 		
 		Optional<List<Endereco>> endereco = Optional.ofNullable(enderecoRepository.findAll());
@@ -34,7 +34,7 @@ public class EnderecoController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/listar/{id}")
 	public ResponseEntity<Endereco> listar(@PathVariable Long id) {
 		
 		Optional<Endereco> endereco = enderecoRepository.findById(id);
@@ -46,14 +46,14 @@ public class EnderecoController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping
+	@PostMapping("/cadastrar")
 	public ResponseEntity<Void> cadastrarEndereco(@RequestBody Endereco endereco) {
 		
 		enderecoRepository.save(endereco);
 		return ResponseEntity.status(201).build();
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("/atualizar/{id}")
 	public ResponseEntity<Endereco> atualizar(@PathVariable Long id, @RequestBody Endereco dadosEndereco) {
 		
 		Optional<Endereco> endereco = enderecoRepository.findById(id);
@@ -67,7 +67,7 @@ public class EnderecoController {
 		
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/deletar/{id}")
 	public ResponseEntity<Void> deletar(@PathVariable Long id) {
 		
 		if (!enderecoRepository.existsById(id)) {

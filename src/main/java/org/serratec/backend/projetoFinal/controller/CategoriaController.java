@@ -17,14 +17,14 @@ public class CategoriaController {
     @Autowired
     private CategoriaRepository repository;
 
-    @PostMapping
+    @PostMapping("/cadastrar")
     public ResponseEntity<Categoria> salvar(@RequestBody Categoria categoria){
         Categoria categoriaSalva = repository.save(categoria);
 
         return new ResponseEntity<>(categoriaSalva, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/listar/{id}")
     public ResponseEntity getCategoria(@PathVariable Long id){
         Optional<Categoria> categoriaExistente = repository.findById(id);
         if(categoriaExistente.isPresent()) {
@@ -33,7 +33,7 @@ public class CategoriaController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity deleteCategoria(@PathVariable Long id) {
         Optional<Categoria> categoriaExistente = repository.findById(id);
         if(categoriaExistente.isPresent()){
@@ -55,7 +55,7 @@ public class CategoriaController {
 
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/atualizar/{id}")
     public ResponseEntity<Categoria> atualizar(@PathVariable Long id, @RequestBody Categoria categoria) {
 
         Optional<Categoria> categoriaExistente = repository.findById(id);

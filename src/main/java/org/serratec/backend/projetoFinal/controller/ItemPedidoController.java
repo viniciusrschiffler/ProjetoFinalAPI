@@ -23,7 +23,7 @@ public class ItemPedidoController {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRespository;
 	
-	@GetMapping
+	@GetMapping("/todos")
 	public ResponseEntity<List<ItemPedido>> listarTodos() {
 		Optional<List<ItemPedido>> itemPedido = Optional.ofNullable(itemPedidoRespository.findAll());
 		
@@ -33,7 +33,7 @@ public class ItemPedidoController {
 		return ResponseEntity.ok(itemPedido.get());
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/listar/{id}")
 	public ResponseEntity<ItemPedido> buscarPorId(@PathVariable Long id) {
 		Optional<ItemPedido> itemPedido = itemPedidoRespository.findById(id);
 		
@@ -45,14 +45,14 @@ public class ItemPedidoController {
 	}
 	
 	
-	@PostMapping
+	@PostMapping("/cadastrar")
 	public ResponseEntity<Void> cadastrar(@RequestBody ItemPedido dadosItemPedido) {
 		
 		itemPedidoRespository.save(dadosItemPedido);
 		return ResponseEntity.status(201).build();
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("/atualizar/{id}")
 	public ResponseEntity<ItemPedido> atualizar(@PathVariable Long id, @RequestBody ItemPedido dadosItemPedido) {
 		Optional<ItemPedido> itemPedido = itemPedidoRespository.findById(id);
 		
@@ -70,7 +70,7 @@ public class ItemPedidoController {
 		return ResponseEntity.ok(itemPedido.get());
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/deletar/{id}")
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 		
 		if (!itemPedidoRespository.existsById(id)) {
