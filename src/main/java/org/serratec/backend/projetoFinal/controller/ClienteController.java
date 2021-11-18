@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/cliente")
 public class ClienteController {
 	
+	@Autowired
+	private MailConfig mailConfig;
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
@@ -46,9 +48,10 @@ public class ClienteController {
 	@PostMapping("/cadastrar")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente inserir( @Valid @RequestBody Cliente cliente){
-		clienteRepository.save(cliente);
-		return cliente;
-	}
+        clienteRepository.save(cliente);
+        mailConfig.sendEmail(cliente.getEmail(), "Cadastro Efetuado", cliente.toString() );
+        return cliente;
+    }
 	
 	@PutMapping("/atualizar/{id}")
 	public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @Valid @RequestBody Cliente cliente){

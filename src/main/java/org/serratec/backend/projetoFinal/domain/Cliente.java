@@ -190,6 +190,15 @@ public class Cliente {
 				&& Objects.equals(nomeUsuario, other.nomeUsuario) && Objects.equals(senha, other.senha)
 				&& Objects.equals(telefone, other.telefone);
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Cliente [email=" + email + ", nomeCompleto=" + nomeCompleto + ", telefone=" + telefone + "]";
+	}
+	
+	
 	
 	
 	
