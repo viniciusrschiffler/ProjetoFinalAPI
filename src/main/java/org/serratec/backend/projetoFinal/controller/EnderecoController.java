@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.serratec.backend.projetoFinal.domain.Endereco;
 import org.serratec.backend.projetoFinal.repository.EnderecoRepository;
+import org.serratec.backend.projetoFinal.service.EnderecoService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,12 +23,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class EnderecoController {
 	
 	@Autowired
-	private EnderecoRepository enderecoRepository;
-	
+	private EnderecoService enderecoService;
 	@GetMapping("/todos")
 	public ResponseEntity<List<Endereco>> listarTodos() {
 		
-		Optional<List<Endereco>> endereco = Optional.ofNullable(enderecoRepository.findAll());
+		Optional<List<Endereco>> endereco = enderecoService.listarTodosService();
 		
 		if(endereco.isPresent()) {
 			return ResponseEntity.ok(endereco.get());
@@ -34,10 +35,11 @@ public class EnderecoController {
 		return ResponseEntity.notFound().build();
 	}
 	
+	
 	@GetMapping("/listar/{id}")
 	public ResponseEntity<Endereco> listar(@PathVariable Long id) {
 		
-		Optional<Endereco> endereco = enderecoRepository.findById(id);
+		Optional<Endereco> endereco = enderecoService.listarService(id);
 		
 		if(endereco.isPresent()) {
 			return ResponseEntity.ok(endereco.get());
@@ -49,20 +51,19 @@ public class EnderecoController {
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Void> cadastrarEndereco(@RequestBody Endereco endereco) {
 		
-		enderecoRepository.save(endereco);
+		enderecoService.cadastrarService(endereco);
 		return ResponseEntity.status(201).build();
 	}
 	
 	@PutMapping("/atualizar/{id}")
 	public ResponseEntity<Endereco> atualizar(@PathVariable Long id, @RequestBody Endereco dadosEndereco) {
 		
-		Optional<Endereco> endereco = enderecoRepository.findById(id);
+		Optional<Endereco> endereco = enderecoService.atualizarService(id, dadosEndereco);
 		
 		if (!endereco.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
-		dadosEndereco.setId(id);
-		enderecoRepository.save(dadosEndereco);
+		
 		return ResponseEntity.ok(endereco.get());
 		
 	}
@@ -70,10 +71,11 @@ public class EnderecoController {
 	@DeleteMapping("/deletar/{id}")
 	public ResponseEntity<Void> deletar(@PathVariable Long id) {
 		
-		if (!enderecoRepository.existsById(id)) {
+		boolean foiDeletada = enderecoService.deletar(id);
+		if (!foiDeletada) {
 			return ResponseEntity.notFound().build();
 		}
-		enderecoRepository.deleteById(id);
+	
 		return ResponseEntity.noContent().build();
 	}
 }
