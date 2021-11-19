@@ -1,12 +1,13 @@
-package org.serratec.backend.projetoFinal.controller;
+package org.serratec.backend.projetoFinal.Controller;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import javax.validation.Valid;
 
 import org.serratec.backend.projetoFinal.domain.Cliente;
-import org.serratec.backend.projetoFinal.repository.ClienteRepository;
+import org.serratec.backend.projetoFinal.dto.ClienteDto;
+import org.serratec.backend.projetoFinal.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,18 +27,28 @@ public class ClienteController {
 	
 	
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private ClienteService clienteService;
 	
 	@GetMapping
-	public List<Cliente> listar(){
-		return clienteRepository.findAll();
+	public ResponseEntity<List<Cliente>> listar(){
+		List<Cliente> cliente = clienteService.listar();
+		return ResponseEntity.ok(cliente);
 	}
+	
+	@GetMapping("/dto")
+	public ResponseEntity<List<ClienteDto>> findAll(){
+		List<ClienteDto> cliente = clienteService.findAll();
+		return ResponseEntity.ok(cliente);
+		
+	}
+	
+
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Cliente> buscarCliente(@PathVariable Long id){
-		Optional<Cliente> cliente = clienteRepository.findById(id);
-		if(cliente.isPresent()) {
-			return ResponseEntity.ok(cliente.get());
+		Cliente cliente = clienteService.buscarCliente(id);
+		if(null != cliente) {
+			return ResponseEntity.ok(cliente);
 		}
 		
 		return ResponseEntity.notFound().build();
@@ -45,54 +56,32 @@ public class ClienteController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente inserir( @Valid @RequestBody Cliente cliente){
-		clienteRepository.save(cliente);
-		return cliente;
+	public ResponseEntity<Cliente> inserir( @Valid @RequestBody Cliente cliente){
+		Cliente cliente1 = clienteService.inserir(cliente);
+		return ResponseEntity.ok(cliente1);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @Valid @RequestBody Cliente cliente){
-			Optional<Cliente> cliente1 = clienteRepository.findById(id);
-			if(cliente1.isPresent()) {
+	public ResponseEntity<Cliente> atualizar(@PathVariable Long id,@Valid @RequestBody Cliente cliente){
+			Cliente cliente1 = clienteService.atualizar(id, cliente);
+			if( null != cliente1) {
 				
-			if(null != cliente.getTelefone()) {
-				cliente1.get().setTelefone(cliente.getTelefone());
+				return ResponseEntity.ok(cliente1);
 			}
-			if(null !=cliente.getCpf()) {
-				cliente1.get().setCpf(cliente.getCpf());
+			else {
+				return ResponseEntity.notFound().build();
 			}
-			if(null !=cliente.getNomeCompleto()) {
-				cliente1.get().setNomeCompleto(cliente.getNomeCompleto());
-			}
-			if(null !=cliente.getEmail()) {
-				cliente1.get().setEmail(cliente.getEmail());
-			}
-			if(null !=cliente.getEndereco()) {
-				cliente1.get().setEndereco(cliente.getEndereco());
-			}
-			if(null !=cliente.getDataNascimento()) {
-				cliente1.get().setDataNascimento(cliente.getDataNascimento());
-			}
-			if(null !=cliente.getNomeUsuario()) {
-				cliente1.get().setNomeUsuario(cliente.getNomeUsuario());
-			}
-			if(null !=cliente.getSenha()) {
-				cliente1.get().setSenha(cliente.getSenha());
-			}
+			
 		}
-		else {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(clienteRepository.save(cliente1.get()));
-	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
+		boolean cliente1 = clienteService.delete(id);
 		
-		if(!clienteRepository.existsById(id)) {
+		if(false == cliente1) {
 			return ResponseEntity.notFound().build();
 		}
-		clienteRepository.deleteById(id);
+		
 		return ResponseEntity.noContent().build();
 	}
 

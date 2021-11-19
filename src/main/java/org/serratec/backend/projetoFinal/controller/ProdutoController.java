@@ -1,10 +1,10 @@
-package org.serratec.backend.projetoFinal.controller;
+package org.serratec.backend.projetoFinal.Controller;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.serratec.backend.projetoFinal.domain.Produto;
-import org.serratec.backend.projetoFinal.repository.ProdutoRepository;
+import org.serratec.backend.projetoFinal.Repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
