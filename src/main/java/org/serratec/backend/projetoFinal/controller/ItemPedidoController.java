@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.serratec.backend.projetoFinal.domain.ItemPedido;
-import org.serratec.backend.projetoFinal.repository.ItemPedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -74,6 +73,7 @@ public class ItemPedidoController {
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 		
 		if (!itemPedidoRespository.existsById(id)) {
+		
 			return ResponseEntity.notFound().build();
 		}
 		
