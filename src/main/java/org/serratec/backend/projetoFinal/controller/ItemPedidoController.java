@@ -3,6 +3,8 @@ package org.serratec.backend.projetoFinal.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.serratec.backend.projetoFinal.domain.ItemPedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class ItemPedidoController {
 	
 	@Autowired
-	private ItemPedidoRepository itemPedidoRespository;
+	ItemPedidoService itemPedidoService;
 	
 	@GetMapping("/todos")
 	public ResponseEntity<List<ItemPedido>> listarTodos() {
+<<<<<<< Updated upstream
 		Optional<List<ItemPedido>> itemPedido = Optional.ofNullable(itemPedidoRespository.findAll());
+=======
+		
+		Optional<List<ItemPedido>> itemPedido = itemPedidoService.listarTodos();
+>>>>>>> Stashed changes
 		
 		if (!itemPedido.isPresent()) {
 			return ResponseEntity.noContent().build();
@@ -34,7 +41,7 @@ public class ItemPedidoController {
 	
 	@GetMapping("/listar/{id}")
 	public ResponseEntity<ItemPedido> buscarPorId(@PathVariable Long id) {
-		Optional<ItemPedido> itemPedido = itemPedidoRespository.findById(id);
+		Optional<ItemPedido> itemPedido = itemPedidoService.buscarPorId(id);
 		
 		if (!itemPedido.isPresent()) {
 			return ResponseEntity.notFound().build();
@@ -45,26 +52,25 @@ public class ItemPedidoController {
 	
 	
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Void> cadastrar(@RequestBody ItemPedido dadosItemPedido) {
+	public ResponseEntity<Void> cadastrar(@Valid @RequestBody ItemPedido dadosItemPedido) {
 		
-		itemPedidoRespository.save(dadosItemPedido);
-		return ResponseEntity.status(201).build();
+		Boolean foiCadastrado = itemPedidoService.cadastrar(dadosItemPedido);
+		
+		if (foiCadastrado) {
+			return ResponseEntity.status(201).build();
+		}
+		
+		return ResponseEntity.internalServerError().build();
+		
 	}
 	
 	@PutMapping("/atualizar/{id}")
-	public ResponseEntity<ItemPedido> atualizar(@PathVariable Long id, @RequestBody ItemPedido dadosItemPedido) {
-		Optional<ItemPedido> itemPedido = itemPedidoRespository.findById(id);
+	public ResponseEntity<ItemPedido> atualizar(@PathVariable Long id, @Valid @RequestBody ItemPedido dadosItemPedido) {
+		Optional<ItemPedido> itemPedido = itemPedidoService.atualizar(id, dadosItemPedido);
 		
 		if (!itemPedido.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
-		
-		if (dadosItemPedido.getId() == null) {
-			dadosItemPedido.setId(id);
-		}
-		
-		
-		itemPedidoRespository.save(dadosItemPedido);
 		
 		return ResponseEntity.ok(itemPedido.get());
 	}
@@ -72,12 +78,12 @@ public class ItemPedidoController {
 	@DeleteMapping("/deletar/{id}")
 	public ResponseEntity<String> deletar(@PathVariable Long id) {
 		
-		if (!itemPedidoRespository.existsById(id)) {
+		Boolean foiDeletado = itemPedidoService.deletar(id);
 		
+		if (!foiDeletado) {
 			return ResponseEntity.notFound().build();
 		}
 		
-		itemPedidoRespository.deleteById(id);
 		return ResponseEntity.ok("Usúario Deletado com sucesso");
 	}
 	
