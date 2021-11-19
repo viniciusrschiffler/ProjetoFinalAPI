@@ -3,11 +3,10 @@ package org.serratec.backend.projetoFinal.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.serratec.backend.projetoFinal.repository.PedidoRepository;
 import org.serratec.backend.projetoFinal.domain.Pedido;
+import org.serratec.backend.projetoFinal.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 	@RestController
 	@RequestMapping("/pedido")
@@ -115,9 +118,6 @@ import org.springframework.web.bind.annotation.RestController;
 			pedidoRepository.deleteById(id);
 			return ResponseEntity.noContent().build();
 		}
-		dadosPedido.setId(id);
-		pedidoRepository.save(dadosPedido);
-		return ResponseEntity.ok(pedido.get());
 
 	}
 

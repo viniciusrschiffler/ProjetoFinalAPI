@@ -1,6 +1,6 @@
 package org.serratec.backend.projetoFinal.enums;
 
-public enum Categoria {
+public enum NomeCategoria {
 
     ENTRETENIMENTO,
     MUSICA,

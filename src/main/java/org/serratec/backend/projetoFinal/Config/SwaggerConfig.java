@@ -1,4 +1,4 @@
-package org.serratec.backend.projetoFinal.Config;
+package org.serratec.backend.projetoFinal.config;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("org.serratec.backend.projetoFinal"))
+                .apis(RequestHandlerSelectors.basePackage("org.serratec.backend.projetoFinal.controller"))
                 //.paths(regex("/Pedido.*"))
                 .paths(PathSelectors.any())
                 .build()
@@ -32,11 +32,11 @@ public class SwaggerConfig {
 	private ApiInfo metaInfo() {
 
         ApiInfo apiInfo = new ApiInfo(
-                "Pedidos API REST",
-                "API REST de cadastro de pedidos.",
+                "Ecommerce API REST",
+                "API REST de Ecommerce.",
                 "1.0",
                 "Terms of Service",
-                new Contact("Grupo 06"," ", " "),
+                new Contact("Grupo 06","grupo6ff@gmail.com", " "),
                 "Apache License Version 2.0",
                 "https://www.apache.org/licesen.html", new ArrayList<VendorExtension>()
         );

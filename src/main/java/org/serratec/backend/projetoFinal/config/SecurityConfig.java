@@ -1,8 +1,6 @@
 package org.serratec.backend.projetoFinal.config;
 
 
-import org.serratec.backend.projetoFinal.util.JWTUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,9 +12,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	@Autowired
-	JWTUtil jwtUtil;
-	
+	private static final String[] AUTH_WHITELIST = {
+			"/api/enderecoViaCep/{cep}"
+	};
 	
 	private static final String[] USER_PERMISSIONS = {
 			"/cliente/listar/{id}",
@@ -42,14 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure (HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		
-//		http.authorizeRequests()
-//		.antMatchers(AUTH_WHITELIST).permitAll()
-//		.anyRequest().authenticated()
-//		.and()
-//		.httpBasic();
-		
 		http
 			.antMatcher("/**").authorizeRequests()
+			.antMatchers(AUTH_WHITELIST).permitAll()
 			.antMatchers(USER_PERMISSIONS).hasRole("USER")
 			.antMatchers("/**/**").hasRole("ADMIN")
 			.anyRequest().authenticated()

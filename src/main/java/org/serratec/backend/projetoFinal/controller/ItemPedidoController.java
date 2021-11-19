@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.serratec.backend.projetoFinal.service.ItemPedidoService;
+
 @RestController
 @RequestMapping("/itemPedido")
 public class ItemPedidoController {
@@ -25,7 +27,7 @@ public class ItemPedidoController {
 	
 	@GetMapping("/todos")
 	public ResponseEntity<List<ItemPedido>> listarTodos() {
-		Optional<List<ItemPedido>> itemPedido = Optional.ofNullable(itemPedidoRespository.findAll());
+		Optional<List<ItemPedido>> itemPedido = ItemPedidoService.listarTodosService();
 		
 		if (!itemPedido.isPresent()) {
 			return ResponseEntity.noContent().build();

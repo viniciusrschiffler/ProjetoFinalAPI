@@ -4,11 +4,15 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import org.serratec.backend.projetoFinal.enums.NomeCategoria;
 
 @Entity
 public class Categoria {
@@ -18,9 +22,9 @@ public class Categoria {
 	@Column(name = "id_categoria")
 	private Long id;
 	
-	@Size(max = 30)
 	@Column(nullable = true, length = 30)
-	private String nome;
+	@Enumerated(EnumType.STRING)
+	private NomeCategoria nome;
 	
 	@Size(max = 150)
 	@Column(nullable = true, length = 150)
@@ -38,7 +42,7 @@ public class Categoria {
 
 
 
-	public Categoria(Long id, @NotBlank(message = "Prencher nome") @Size(max = 30) String nome,
+	public Categoria(Long id, @NotBlank(message = "Prencher nome") @Size(max = 30) NomeCategoria nome,
 			@NotBlank(message = "Prencher descrição") @Size(max = 150) String descricao) {
 		super();
 		this.id = id;
@@ -54,11 +58,11 @@ public class Categoria {
 		this.id = id;
 	}
 
-	public String getNome() {
+	public NomeCategoria getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void setNome(NomeCategoria nome) {
 		this.nome = nome;
 	}
 

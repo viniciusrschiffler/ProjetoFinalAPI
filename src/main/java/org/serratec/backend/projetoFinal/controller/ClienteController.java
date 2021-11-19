@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.serratec.backend.projetoFinal.domain.Cliente;
+import org.serratec.backend.projetoFinal.mail.MailConfig;
 import org.serratec.backend.projetoFinal.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
