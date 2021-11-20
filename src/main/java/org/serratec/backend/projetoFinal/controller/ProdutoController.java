@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.serratec.backend.projetoFinal.domain.Produto;
 import org.serratec.backend.projetoFinal.repository.ProdutoRepository;
+import org.serratec.backend.projetoFinal.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,58 +25,55 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	
+	
+	@Autowired
+	private ProdutoService produtoService;
+
 	@GetMapping("/todos")
 	public ResponseEntity<List<Produto>> listarTodos() {
-		
-		Optional<List<Produto>> produto = Optional.ofNullable(produtoRepository.findAll());
+		Optional<List<Produto>> produto = produtoService.listarTodosService();
 		
 		if(produto.isPresent()) {
 			return ResponseEntity.ok(produto.get());
 		}
-		
 		return ResponseEntity.notFound().build();
 	}
 	
 	@GetMapping("/listar/{id}")
 	public ResponseEntity<Produto> listar(@PathVariable Long id) {
-		
-		Optional<Produto> produto = produtoRepository.findById(id);
+		Optional<Produto> produto = produtoService.listar(id);
 		
 		if(produto.isPresent()) {
 			return ResponseEntity.ok(produto.get());
 		}
-		
 		return ResponseEntity.notFound().build();
 	}
 	
 	@PostMapping
 	public ResponseEntity<Void> cadastrarProduto(@RequestBody Produto produto) {
-		
 		produtoRepository.save(produto);
 		return ResponseEntity.status(201).build();
 	}
 	
-	@PutMapping("/cadastrar/{id}")
+	@PutMapping("/atualizar/{id}")
 	public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody Produto dadosProduto) {
 		
-		Optional<Produto> produto = produtoRepository.findById(id);
+		Optional<Produto> produto = produtoService.atualizarService(id, dadosProduto);
 		
 		if (!produto.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
-		dadosProduto.setId(id);
-		produtoRepository.save(dadosProduto);
 		return ResponseEntity.ok(produto.get());
 		
 	}
 	
-	@DeleteMapping("/deletar/atualizar/{id}")
+	@DeleteMapping("/deletar/{id}")
 	public ResponseEntity<Void> deletar(@PathVariable Long id) {
 		
-		if (!produtoRepository.existsById(id)) {
+		boolean foiDeletado = produtoService.deletar(id);
+		if(!foiDeletado) {
 			return ResponseEntity.notFound().build();
 		}
-		produtoRepository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
 	
