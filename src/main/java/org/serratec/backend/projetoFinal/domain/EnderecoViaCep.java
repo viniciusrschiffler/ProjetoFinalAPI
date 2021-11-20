@@ -77,9 +77,5 @@ public class EnderecoViaCep {
 				&& Objects.equals(complemento, other.complemento) && Objects.equals(ibge, other.ibge)
 				&& Objects.equals(localidade, other.localidade) && Objects.equals(logradouro, other.logradouro)
 				&& Objects.equals(uf, other.uf);
-	}
-	
-	
-	
-
+	}	
 }

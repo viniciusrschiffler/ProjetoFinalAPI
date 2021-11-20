@@ -7,8 +7,10 @@ import java.util.Optional;
 import org.serratec.backend.projetoFinal.domain.Produto;
 import org.serratec.backend.projetoFinal.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+@Service
 public class ProdutoService {
 	
 	@Autowired

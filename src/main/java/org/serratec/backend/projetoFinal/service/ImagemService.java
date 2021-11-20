@@ -6,8 +6,10 @@ import org.serratec.backend.projetoFinal.domain.Imagem;
 import org.serratec.backend.projetoFinal.domain.Produto;
 import org.serratec.backend.projetoFinal.repository.ImagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+@Service
 public class ImagemService {
 	
 	@Autowired
