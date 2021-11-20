@@ -4,6 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+target/classes/META-INF/maven/org.serratec.backend/ProjetoFinal/pom.properties
+
 ### STS ###
 .apt_generated
 .classpath
