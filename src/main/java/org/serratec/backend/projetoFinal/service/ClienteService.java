@@ -10,6 +10,7 @@ import java.util.Optional;
 import org.serratec.backend.projetoFinal.repository.ClienteRepository;
 import org.serratec.backend.projetoFinal.domain.Cliente;
 import org.serratec.backend.projetoFinal.dto.ClienteDto;
+import org.serratec.backend.projetoFinal.mail.MailConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,8 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
+	@Autowired
+	private MailConfig mailConfig;
 	
 	
 	public List<Cliente> listar(){
@@ -45,7 +48,10 @@ public class ClienteService {
 	}
 	
 	public Cliente inserir( Cliente cliente){
-		clienteRepository.save(cliente);
+		
+		cliente = clienteRepository.save(cliente);
+		
+		mailConfig.sendEmail(cliente.getEmail(), "Cadastro Efetuado", cliente.toString());
 		return cliente;
 	}
 	

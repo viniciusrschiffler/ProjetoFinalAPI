@@ -3,6 +3,8 @@ package org.serratec.backend.projetoFinal.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.serratec.backend.projetoFinal.domain.Endereco;
 import org.serratec.backend.projetoFinal.service.EnderecoService;
 
@@ -49,14 +51,14 @@ public class EnderecoController {
 	}
 	
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Void> cadastrarEndereco(@RequestBody Endereco endereco) {
+	public ResponseEntity<Void> cadastrarEndereco(@Valid @RequestBody Endereco endereco) {
 		
 		enderecoService.cadastrarService(endereco);
 		return ResponseEntity.status(201).build();
 	}
 	
 	@PutMapping("/atualizar/{id}")
-	public ResponseEntity<Endereco> atualizar(@PathVariable Long id, @RequestBody Endereco dadosEndereco) {
+	public ResponseEntity<Endereco> atualizar(@PathVariable Long id, @Valid @RequestBody Endereco dadosEndereco) {
 		
 		Optional<Endereco> endereco = enderecoService.atualizarService(id, dadosEndereco);
 		

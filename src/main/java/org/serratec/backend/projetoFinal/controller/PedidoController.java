@@ -3,8 +3,10 @@ package org.serratec.backend.projetoFinal.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.serratec.backend.projetoFinal.domain.Pedido;
-import org.serratec.backend.projetoFinal.repository.PedidoRepository;
+import org.serratec.backend.projetoFinal.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,14 +25,13 @@ import io.swagger.annotations.ApiResponses;
 	@RestController
 	@RequestMapping("/pedido")
 	public class PedidoController {
-	
+
 		@Autowired
-		private PedidoRepository pedidoRepository;
+		private PedidoService pedidoService;
 		
 		@GetMapping("/todos")
 		public ResponseEntity<List<Pedido>> listarTodos() {
-			
-			Optional<List<Pedido>> pedido = Optional.ofNullable(pedidoRepository.findAll());
+			Optional<List<Pedido>> pedido = pedidoService.listarTodos();
 			
 			if(pedido.isPresent()) {
 				return ResponseEntity.ok(pedido.get());
@@ -52,7 +53,7 @@ import io.swagger.annotations.ApiResponses;
 
 		public ResponseEntity<Pedido> listar(@PathVariable Long id) {
 			
-			Optional<Pedido> pedido = pedidoRepository.findById(id);
+			Optional<Pedido> pedido = pedidoService.listar(id);
 			
 			if(pedido.isPresent()) {
 				return ResponseEntity.ok(pedido.get());
@@ -60,11 +61,9 @@ import io.swagger.annotations.ApiResponses;
 			
 			return ResponseEntity.notFound().build();
 		}
-		
 		@PostMapping("/cadastrar")
-
+		
 		@ApiOperation(value = "Salva um pedido")
-
 		@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Pedido Salvo"),
 			@ApiResponse(code = 401, message = "Erro de autenticação"),
@@ -72,11 +71,17 @@ import io.swagger.annotations.ApiResponses;
 			@ApiResponse(code = 404, message = "Recurso não encotrado"),
 			@ApiResponse(code = 505, message = "Ocorreu uma exceção") })
 
-		public ResponseEntity<Void> cadastrarPedido(@RequestBody Pedido pedido) {
+		public ResponseEntity<Void> cadastrarPedido(@Valid @RequestBody Pedido pedido) {
 			
-			pedidoRepository.save(pedido);
-			return ResponseEntity.status(201).build();
+			boolean foiCadastrado = pedidoService.cadastrarPedido(pedido);
+			if (foiCadastrado) {
+				return ResponseEntity.status(201).build();
+			}
+			else {
+				return ResponseEntity.internalServerError().build();
+			}
 		}
+		
 		
 		@PutMapping("/atualizar/{id}")
 
@@ -88,15 +93,13 @@ import io.swagger.annotations.ApiResponses;
 			@ApiResponse(code = 404, message = "Recurso não encotrado"),
 			@ApiResponse(code = 505, message = "Ocorreu uma exceção") })
 
-		public ResponseEntity<Pedido> atualizar(@PathVariable Long id, @RequestBody Pedido dadosPedido) {
+		public ResponseEntity<Pedido> atualizar(@PathVariable Long id, @Valid @RequestBody Pedido dadosPedido) {
 			
-			Optional<Pedido> pedido = pedidoRepository.findById(id);
+			Optional<Pedido> pedido = pedidoService.atualizar(id, dadosPedido);
 			
 			if (!pedido.isPresent()) {
 				return ResponseEntity.notFound().build();
 			}
-			dadosPedido.setId(id);
-			pedidoRepository.save(dadosPedido);
 			return ResponseEntity.ok(pedido.get());
 		}
 		
@@ -111,13 +114,13 @@ import io.swagger.annotations.ApiResponses;
 			@ApiResponse(code = 505, message = "Ocorreu uma exceção") })
 
 		public ResponseEntity<Void> deletar(@PathVariable Long id) {
+			boolean foiDeletado = pedidoService.deletar(id);
 			
-			if (!pedidoRepository.existsById(id)) {
+			if (!foiDeletado) {
 				return ResponseEntity.notFound().build();
 			}
-			pedidoRepository.deleteById(id);
+			
 			return ResponseEntity.noContent().build();
 		}
 
 	}
-

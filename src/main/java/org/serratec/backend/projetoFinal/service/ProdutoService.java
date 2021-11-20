@@ -16,7 +16,7 @@ public class ProdutoService {
 	@Autowired
     private static ProdutoRepository produtoRepository;	
 
-    private Produto addImageUrl(Produto produto) {
+	private Produto addImageUrl(Produto produto) {
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/produto/{id}/image")
                 .buildAndExpand(produto.getId()).toUri();
         Produto produto1 = new Produto();

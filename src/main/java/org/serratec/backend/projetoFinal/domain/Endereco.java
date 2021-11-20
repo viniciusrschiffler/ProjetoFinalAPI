@@ -8,7 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.websocket.OnMessage;
+
+import org.springframework.format.annotation.NumberFormat;
 
 @Entity
 public class Endereco {
@@ -18,17 +22,17 @@ public class Endereco {
 	@Column(name = "id_endereco")
 	private Long id;
 	
-	@NotBlank(message = "Prencher cep")
+	@NotBlank(message = "Preencher cep")
 	@Size(max = 9)
 	@Column(nullable = false, length = 9)
 	private String cep;
 	
-	@NotBlank(message = "Prencher rua")
+	@NotBlank(message = "Preencher rua")
 	@Size(max = 100)
 	@Column(nullable = false, length = 100)
 	private String rua;
 	
-	@NotBlank(message = "Prencher bairro")
+	@NotBlank(message = "Preencher bairro")
 	@Size(max = 50)
 	@Column(nullable = false, length = 50)
 	private String bairro;
@@ -37,6 +41,7 @@ public class Endereco {
 	@Column(nullable = true, length = 30)
 	private String cidade;
 	
+	@NotNull(message = "Preencher Número")
 	@Column(nullable = false)
 	private Integer numero;
 	

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -31,12 +32,14 @@ public class Produto {
 	@Column(nullable = true, length = 100)
 	private String descricao;
 	
+	@NotNull
 	@Column(nullable = false, name = "qtd_estoque")
 	private Integer qtdEstoque;
 	
 	@Column(nullable = true, name = "data_cadastro")
 	private LocalDate dataCadastro;
 	
+	@NotNull
 	@Column(nullable = false, name = "valor_unitario")
 	private Float valorUnitario;
 	

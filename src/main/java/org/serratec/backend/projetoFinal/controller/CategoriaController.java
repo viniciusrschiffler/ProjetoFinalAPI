@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/categoria")
 public class CategoriaController {
@@ -18,7 +20,7 @@ public class CategoriaController {
     private CategoriaRepository repository;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<Categoria> salvar(@RequestBody Categoria categoria){
+    public ResponseEntity<Categoria> salvar(@Valid @RequestBody Categoria categoria){
         Categoria categoriaSalva = repository.save(categoria);
 
         return new ResponseEntity<>(categoriaSalva, HttpStatus.CREATED);
@@ -56,7 +58,7 @@ public class CategoriaController {
 
 
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<Categoria> atualizar(@PathVariable Long id, @RequestBody Categoria categoria) {
+    public ResponseEntity<Categoria> atualizar(@PathVariable Long id, @Valid @RequestBody Categoria categoria) {
 
         Optional<Categoria> categoriaExistente = repository.findById(id);
 

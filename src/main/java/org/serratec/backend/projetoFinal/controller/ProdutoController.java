@@ -3,6 +3,8 @@ package org.serratec.backend.projetoFinal.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.serratec.backend.projetoFinal.domain.Produto;
 import org.serratec.backend.projetoFinal.repository.ProdutoRepository;
 import org.serratec.backend.projetoFinal.service.ProdutoService;
@@ -50,13 +52,13 @@ public class ProdutoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> cadastrarProduto(@RequestBody Produto produto) {
+	public ResponseEntity<Void> cadastrarProduto(@Valid @RequestBody Produto produto) {
 		produtoRepository.save(produto);
 		return ResponseEntity.status(201).build();
 	}
 	
 	@PutMapping("/atualizar/{id}")
-	public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody Produto dadosProduto) {
+	public ResponseEntity<Produto> atualizar(@PathVariable Long id, @Valid @RequestBody Produto dadosProduto) {
 		
 		Optional<Produto> produto = produtoService.atualizarService(id, dadosProduto);
 		
