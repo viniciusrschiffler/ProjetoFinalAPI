@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.serratec.backend.projetoFinal.domain.Endereco;
-import org.serratec.backend.projetoFinal.repository.EnderecoRepository;
 import org.serratec.backend.projetoFinal.service.EnderecoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,7 @@ public class EnderecoController {
 	
 	@Autowired
 	private EnderecoService enderecoService;
+	
 	@GetMapping("/todos")
 	public ResponseEntity<List<Endereco>> listarTodos() {
 		

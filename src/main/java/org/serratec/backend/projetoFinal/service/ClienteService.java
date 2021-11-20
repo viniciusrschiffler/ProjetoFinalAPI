@@ -7,7 +7,7 @@ import java.util.Optional;
 
 
 
-import org.serratec.backend.projetoFinal.Repository.ClienteRepository;
+import org.serratec.backend.projetoFinal.repository.ClienteRepository;
 import org.serratec.backend.projetoFinal.domain.Cliente;
 import org.serratec.backend.projetoFinal.dto.ClienteDto;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -37,7 +37,6 @@ public class Cliente {
 	@Column(nullable = false, length = 60, name = "nome_completo")
 	private String nomeCompleto;
 	
-	//@NotBlank(message = "Prencher senha")
 	@Size(max = 255)
 	@Column(nullable = true, length = 255)
 	private String senha;
@@ -47,12 +46,10 @@ public class Cliente {
 	@Column(nullable = false, length = 14)
 	private String cpf;
 	
-	//@NotBlank(message = "Prencher telefone")
 	@Size(max = 11)
 	@Column(nullable = true, length = 11)
 	private String telefone;
 	
-	//@NotBlank(message = "Prencher data de nascimento")
 	@Column(nullable = true, name = "data_nasc")
 	private LocalDate dataNascimento;
 	
