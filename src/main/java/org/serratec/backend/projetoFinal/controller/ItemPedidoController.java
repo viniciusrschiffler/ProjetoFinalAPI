@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.serratec.backend.projetoFinal.domain.ItemPedido;
+import org.serratec.backend.projetoFinal.service.ItemPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,12 +27,8 @@ public class ItemPedidoController {
 	
 	@GetMapping("/todos")
 	public ResponseEntity<List<ItemPedido>> listarTodos() {
-<<<<<<< Updated upstream
-		Optional<List<ItemPedido>> itemPedido = Optional.ofNullable(itemPedidoRespository.findAll());
-=======
 		
 		Optional<List<ItemPedido>> itemPedido = itemPedidoService.listarTodos();
->>>>>>> Stashed changes
 		
 		if (!itemPedido.isPresent()) {
 			return ResponseEntity.noContent().build();
@@ -88,7 +85,6 @@ public class ItemPedidoController {
 	}
 	
 	
-	
-	
-	
 }
+	
+	
