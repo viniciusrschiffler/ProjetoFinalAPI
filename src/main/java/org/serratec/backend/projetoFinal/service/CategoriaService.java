@@ -1,8 +1,8 @@
 package org.serratec.backend.projetoFinal.service;
 
-import io.swagger.v3.oas.annotations.servers.Server;
 import org.serratec.backend.projetoFinal.domain.Categoria;
 import org.serratec.backend.projetoFinal.repository.CategoriaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -11,7 +11,8 @@ import java.util.Optional;
 
 @Service
 public class CategoriaService {
-
+	
+	@Autowired
     private CategoriaRepository repository;
 
     public Categoria salvarCategoria(Categoria categoria) {

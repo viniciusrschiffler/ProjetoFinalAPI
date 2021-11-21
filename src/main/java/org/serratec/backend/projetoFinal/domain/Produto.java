@@ -4,13 +4,17 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -43,11 +47,12 @@ public class Produto {
 	@Column(nullable = false, name = "valor_unitario")
 	private Float valorUnitario;
 	
-	@Column(nullable = true)
+	@Lob
 	private byte[] imagem;
 	
-	@OneToOne
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "id_categoria")
+	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 
 	public Produto() {

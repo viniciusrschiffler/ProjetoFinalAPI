@@ -31,7 +31,8 @@ public class SwaggerConfig {
 
 	private ApiInfo metaInfo() {
 
-        ApiInfo apiInfo = new ApiInfo(
+        @SuppressWarnings("rawtypes")
+		ApiInfo apiInfo = new ApiInfo(
                 "Ecommerce API REST",
                 "API REST de Ecommerce.",
                 "1.0",

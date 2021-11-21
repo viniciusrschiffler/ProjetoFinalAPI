@@ -1,7 +1,6 @@
 package org.serratec.backend.projetoFinal.controller;
 
 import org.serratec.backend.projetoFinal.domain.Categoria;
-import org.serratec.backend.projetoFinal.repository.CategoriaRepository;
 import org.serratec.backend.projetoFinal.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +16,7 @@ import javax.validation.Valid;
 @RequestMapping("/categoria")
 public class CategoriaController {
 
+	@Autowired
     private CategoriaService service;
 
     public CategoriaController(CategoriaService service) {
@@ -31,31 +31,34 @@ public class CategoriaController {
     }
 
     @GetMapping("/listar/{id}")
-    public ResponseEntity getCategoria(@PathVariable Long id){
+    public ResponseEntity<Categoria> getCategoria(@PathVariable Long id){
         Optional<Categoria> categoriaExistente = service.encontrarCategoria(id);
+        
         if(categoriaExistente.isPresent()) {
-            return ResponseEntity.ok(categoriaExistente);
-        } else return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return ResponseEntity.ok(categoriaExistente.get());
+            
+        } else return ResponseEntity.notFound().build();
 
     }
 
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity deleteCategoria(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCategoria(@PathVariable Long id) {
         Optional<Categoria> categoriaExistente = service.encontrarCategoria(id);
         if(categoriaExistente.isPresent()){
             service.deletarCategoria(id);
-            return new ResponseEntity(HttpStatus.NO_CONTENT);
+            return ResponseEntity.noContent().build();
         } else {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
     @GetMapping("/todos")
-    public ResponseEntity retornaTodos() {
+    public ResponseEntity<List<Categoria>> retornaTodos() {
         List<Categoria> todasCategorias = service.retornaTodasCategorias();
+        System.out.println();
         if(!todasCategorias.isEmpty()) {
             return ResponseEntity.ok(todasCategorias);
         } else {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -69,8 +72,10 @@ public class CategoriaController {
         if (!categoriaExistente.isPresent()) {
             return ResponseEntity.notFound().build();
         }
+        
         categoria.setId(id);
         service.salvarCategoria(categoria);
+        
         return ResponseEntity.ok(categoriaExistente.get());
 
     }

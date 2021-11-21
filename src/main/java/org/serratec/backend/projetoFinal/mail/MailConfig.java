@@ -16,7 +16,7 @@ public class MailConfig {
 		message.setFrom("grupo6ff@gmail.com");
 		message.setTo(para);
 		message.setSubject("Projeto Final API");
-		message.setText("Testando" + texto + "1 2.3");
+		message.setText(texto);
 		javaMailSender.send(message);
 	}
 

@@ -2,6 +2,7 @@ package org.serratec.backend.projetoFinal.domain;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,11 +31,11 @@ public class ItemPedido {
 	@Column(nullable = false)
 	private Integer precoVenda;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "id_pedido")
 	private Pedido pedido;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "id_produto")
 	private Produto produto;
 

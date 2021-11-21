@@ -3,6 +3,7 @@ package org.serratec.backend.projetoFinal.domain;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -53,7 +54,7 @@ public class Cliente {
 	@Column(nullable = true, name = "data_nasc")
 	private LocalDate dataNascimento;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "id_endereco")
 	private Endereco endereco;
 
@@ -192,7 +193,11 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente [email=" + email + ", nomeCompleto=" + nomeCompleto + ", telefone=" + telefone + "]";
+		return "Parabéns você foi cadastrado com sucesso!!!\n"
+				+ "DADOS DO SEU CADASTRO:\n"
+				+ "Email: " + email + "\n"
+				+ "NomeCompleto: " + nomeCompleto + "\n"
+				+ "Telefone: " + telefone;
 	}
 	
 	

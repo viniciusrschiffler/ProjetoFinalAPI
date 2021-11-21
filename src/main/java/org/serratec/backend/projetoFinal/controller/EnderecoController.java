@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.serratec.backend.projetoFinal.domain.Endereco;
 import org.serratec.backend.projetoFinal.service.EnderecoService;
-
+import org.serratec.backend.projetoFinal.service.EnderecoViaCepService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,6 +26,9 @@ public class EnderecoController {
 	
 	@Autowired
 	private EnderecoService enderecoService;
+	
+	@Autowired
+	private EnderecoViaCepService viaCepService;
 	
 	@GetMapping("/todos")
 	public ResponseEntity<List<Endereco>> listarTodos() {
@@ -56,6 +60,27 @@ public class EnderecoController {
 		enderecoService.cadastrarService(endereco);
 		return ResponseEntity.status(201).build();
 	}
+	
+	@PostMapping("/cadastrarPorCep")
+	public ResponseEntity<Endereco> cadastrarEnderecoPorCep(@PathParam("cep") String cep, @PathParam("numero") Integer numero, @PathParam("complemento") String complemento) {
+		
+		Endereco enderecoViaCepSite = viaCepService.buscarService(cep, numero) ;
+
+		if (enderecoViaCepSite != null) {
+		
+			
+			if (complemento != null) {
+				enderecoViaCepSite.setComplemento(complemento);
+			}
+			
+			enderecoService.cadastrarService(enderecoViaCepSite);
+			
+			return ResponseEntity.status(201).build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
+		
 	
 	@PutMapping("/atualizar/{id}")
 	public ResponseEntity<Endereco> atualizar(@PathVariable Long id, @Valid @RequestBody Endereco dadosEndereco) {

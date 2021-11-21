@@ -10,9 +10,6 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.websocket.OnMessage;
-
-import org.springframework.format.annotation.NumberFormat;
 
 @Entity
 public class Endereco {
@@ -63,14 +60,30 @@ public class Endereco {
 		this.id = id;
 	}
 
+	
+	
+	
 
-	public Endereco(Long id, @NotBlank(message = "Prencher cep") @Size(max = 9) String cep,
-			@NotBlank(message = "Prencher rua") @Size(max = 100) String rua,
-			@NotBlank(message = "Prencher bairro") @Size(max = 50) String bairro,
-			@NotBlank(message = "Prencher cidade") @Size(max = 30) String cidade,
-			@NotBlank(message = "Prencher numero") Integer numero,
-			@NotBlank(message = "Prencher complemento") @Size(max = 20) String complemento,
-			@NotBlank(message = "Prencher estado") @Size(max = 2) String estado) {
+
+	public Endereco(@NotBlank(message = "Preencher cep") @Size(max = 9) String cep,
+			@NotBlank(message = "Preencher rua") @Size(max = 100) String rua,
+			@NotBlank(message = "Preencher bairro") @Size(max = 50) String bairro, @Size(max = 30) String cidade,
+			@NotNull(message = "Preencher Número") Integer numero, @Size(max = 2) String estado) {
+		super();
+		this.cep = cep;
+		this.rua = rua;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.numero = numero;
+		this.estado = estado;
+	}
+
+
+	public Endereco(Long id, @NotBlank(message = "Preencher cep") @Size(max = 9) String cep,
+			@NotBlank(message = "Preencher rua") @Size(max = 100) String rua,
+			@NotBlank(message = "Preencher bairro") @Size(max = 50) String bairro, @Size(max = 30) String cidade,
+			@NotNull(message = "Preencher Número") Integer numero, @Size(max = 20) String complemento,
+			@Size(max = 2) String estado) {
 		super();
 		this.id = id;
 		this.cep = cep;

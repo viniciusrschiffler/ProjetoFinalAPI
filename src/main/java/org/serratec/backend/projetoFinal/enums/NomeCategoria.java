@@ -5,6 +5,5 @@ public enum NomeCategoria {
     ENTRETENIMENTO,
     MUSICA,
     DANCA,
-    INFORMATICA,
-    João
+    INFORMATICA
 }

@@ -51,7 +51,7 @@ public class ProdutoController {
 		return ResponseEntity.notFound().build();
 	}
 	
-	@PostMapping
+	@PostMapping("/cadastrar")
 	public ResponseEntity<Void> cadastrarProduto(@Valid @RequestBody Produto produto) {
 		produtoRepository.save(produto);
 		return ResponseEntity.status(201).build();
