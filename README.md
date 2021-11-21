@@ -30,7 +30,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 > - Mude a porta em : `spring.datasource.url=jdbc:postgresql://localhost:PORTAAQUI/ProjetoFinalApi`
 > - Mude a senha em : `spring.datasource.password=SENHAAQQUI`
 > - Rode o projeto
-> - Mude para `none` em : `spring.jpa.hibernate.ddl-auto=AQUI`
+> - Coloque `none` em : `spring.jpa.hibernate.ddl-auto=AQUI`
 > - Projeto pronto para uso!
 
 ## 🤝 Colaboradores
@@ -38,17 +38,17 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 Agradecemos às seguintes pessoas que contribuíram para este projeto:
 
 <div style="display: flex; flex-direction: row;">
-<img href="https://github.com/danicaovilla" rel="Danielli Yasmin Pinheiro Caovilla" src="https://avatars.githubusercontent.com/u/89459609?v=4" alt="drawing" style="width:72px; border-radius: 50%;"/>
+<img src="https://avatars.githubusercontent.com/u/89459609?v=4" alt="drawing" style="width:72px; border-radius: 50%;"/>
 
-<img href="https://github.com/viniciusrschiffler" rel="Vinicius Rocha Schiffler" src="https://avatars.githubusercontent.com/u/61471521?v=4" alt="drawing" style="width:72px; border-radius: 50%;"/>
+<img src="https://avatars.githubusercontent.com/u/61471521?v=4" alt="drawing" style="width:72px; border-radius: 50%;"/>
 
-<img href="https://github.com/anaclarabull" rel="Ana Clara Mendes Bull" src="https://avatars.githubusercontent.com/u/89466535?v=4" alt="drawing" style="width:72px; border-radius: 50%"/>
+<img src="https://avatars.githubusercontent.com/u/89466535?v=4" alt="drawing" style="width:72px; border-radius: 50%"/>
 
-<img href="https://github.com/Natanalpe" rel="Natan Altomar Pereira" src="https://avatars.githubusercontent.com/u/89466514?v=4" alt="drawing" style="width:72px; border-radius: 50%;"/>
+<img src="https://avatars.githubusercontent.com/u/89466514?v=4" alt="drawing" style="width:72px; border-radius: 50%;"/>
 
-<img href="https://github.com/WillianMotta" rel="Willian Motta Ferreira Braga" src="https://avatars.githubusercontent.com/u/73251848?v=4" alt="drawing" style="width:72px; border-radius: 50%;"/>
+<img src="https://avatars.githubusercontent.com/u/73251848?v=4" alt="drawing" style="width:72px; border-radius: 50%;"/>
 
-<img href="https://github.com/Paulo-BFR" rel="Paulo Rubens Marques Pereira" src="https://avatars.githubusercontent.com/u/89466530?v=4" alt="drawing" style="width:72px; border-radius: 50%;"/>
+<img src="https://avatars.githubusercontent.com/u/89466530?v=4" alt="drawing" style="width:72px; border-radius: 50%;"/>
 </div>
 
 ### Danielli Yasmin Pinheiro Caovilla
