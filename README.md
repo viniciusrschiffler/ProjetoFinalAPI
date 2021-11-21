@@ -32,6 +32,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 > - Rode o projeto
 > - Coloque `none` em : `spring.jpa.hibernate.ddl-auto=AQUI`
 > - Projeto pronto para uso!
+> - Quando fizer uma chamada para a api, use o basic Auth, com user: "user" e senha: "1234" para acesso de usuario e user: "grupo6" e senha: "MarceloDa100" para acesso de administrador
 
 ## 🤝 Colaboradores
 
