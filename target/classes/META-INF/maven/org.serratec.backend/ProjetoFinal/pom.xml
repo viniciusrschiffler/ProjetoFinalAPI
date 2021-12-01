@@ -13,10 +13,13 @@
 	<artifactId>ProjetoFinal</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ProjetoFinal</name>
+	
 	<description>Projeto final de api</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+	
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
