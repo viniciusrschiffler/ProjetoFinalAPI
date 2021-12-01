@@ -54,6 +54,9 @@ public class Cliente {
 	@Column(nullable = true, name = "data_nasc")
 	private LocalDate dataNascimento;
 	
+	@Column(nullable = true, name = "tipo")
+	private String tipo;
+	
 	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "id_endereco")
 	private Endereco endereco;
@@ -71,13 +74,12 @@ public class Cliente {
 
 
 
-	public Cliente(Long id, @NotBlank(message = "Prencher email") @Size(max = 30) String email,
+
+	public Cliente(Long id, @Email(message = "Prencher email") @Size(max = 30) String email,
 			@NotBlank(message = "Prencher nome do usuario ") @Size(max = 20) String nomeUsuario,
 			@NotBlank(message = "Prencher seu nome completo") @Size(max = 60) String nomeCompleto,
-			@NotBlank(message = "Prencher senha") @Size(max = 255) String senha,
-			@NotBlank(message = "Prencher cpf") @Size(max = 14) String cpf,
-			@NotBlank(message = "Prencher telefone") @Size(max = 11) String telefone,
-			@NotBlank(message = "Prencher data de nascimento") LocalDate dataNascimento, Endereco endereco) {
+			@Size(max = 255) String senha, @NotBlank(message = "Prencher cpf") @Size(max = 14) String cpf,
+			@Size(max = 11) String telefone, LocalDate dataNascimento, String tipo, Endereco endereco) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -87,8 +89,10 @@ public class Cliente {
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.dataNascimento = dataNascimento;
+		this.tipo = tipo;
 		this.endereco = endereco;
 	}
+
 
 
 	public Long getId() {
@@ -155,6 +159,19 @@ public class Cliente {
 		this.dataNascimento = dataNascimento;
 	}
 	
+	
+
+	public String getTipo() {
+		return tipo;
+	}
+
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
 
 	public Endereco getEndereco() {
 		return endereco;
@@ -166,11 +183,11 @@ public class Cliente {
 
 
 
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(cpf, dataNascimento, email, endereco, id, nomeCompleto, nomeUsuario, senha, telefone);
+		return Objects.hash(cpf, dataNascimento, email, endereco, id, nomeCompleto, nomeUsuario, senha, telefone, tipo);
 	}
+
 
 
 	@Override
@@ -186,22 +203,8 @@ public class Cliente {
 				&& Objects.equals(email, other.email) && Objects.equals(endereco, other.endereco)
 				&& Objects.equals(id, other.id) && Objects.equals(nomeCompleto, other.nomeCompleto)
 				&& Objects.equals(nomeUsuario, other.nomeUsuario) && Objects.equals(senha, other.senha)
-				&& Objects.equals(telefone, other.telefone);
+				&& Objects.equals(telefone, other.telefone) && Objects.equals(tipo, other.tipo);
 	}
-
-
-
-	@Override
-	public String toString() {
-		return "Parabéns você foi cadastrado com sucesso!!!\n"
-				+ "DADOS DO SEU CADASTRO:\n"
-				+ "Email: " + email + "\n"
-				+ "NomeCompleto: " + nomeCompleto + "\n"
-				+ "Telefone: " + telefone;
-	}
-	
-	
-	
 	
 	
 }

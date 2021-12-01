@@ -1,7 +1,6 @@
 package org.serratec.backend.projetoFinal.domain;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -13,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -44,11 +42,18 @@ public class Produto {
 	private LocalDate dataCadastro;
 	
 	@NotNull
-	@Column(nullable = false, name = "valor_unitario")
-	private Float valorUnitario;
+	@Column(nullable = false, name = "valor_compra")
+	private Float valorCompra;
 	
-	@Lob
-	private byte[] imagem;
+	@NotNull
+	@Column(nullable = false, name = "valor_aluguel")
+	private Float valorAluguel;
+	
+	@Column(nullable = true, name = "imagem")
+	private String imagem;
+	
+	@Column(nullable = true, name = "imagemFundo")
+	private String imagemFundo;
 	
 	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "id_categoria")
@@ -67,8 +72,8 @@ public class Produto {
 
 
 	public Produto(Long id, @NotBlank(message = "Prencher nome") @Size(max = 30) String nome,
-			@Size(max = 100) String descricao,Integer qtdEstoque,
-			LocalDate dataCadastro, Float valorUnitario, byte[] imagem,
+			@Size(max = 100) String descricao, @NotNull Integer qtdEstoque, LocalDate dataCadastro,
+			@NotNull Float valorCompra, @NotNull Float valorAluguel, String imagem, String imagemFundo,
 			Categoria categoria) {
 		super();
 		this.id = id;
@@ -76,83 +81,120 @@ public class Produto {
 		this.descricao = descricao;
 		this.qtdEstoque = qtdEstoque;
 		this.dataCadastro = dataCadastro;
-		this.valorUnitario = valorUnitario;
+		this.valorCompra = valorCompra;
+		this.valorAluguel = valorAluguel;
 		this.imagem = imagem;
+		this.imagemFundo = imagemFundo;
 		this.categoria = categoria;
 	}
+
 
 	public Long getId() {
 		return id;
 	}
 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 	public String getNome() {
 		return nome;
 	}
 
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 
 	public String getDescricao() {
 		return descricao;
 	}
 
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
 
 	public Integer getQtdEstoque() {
 		return qtdEstoque;
 	}
 
+
 	public void setQtdEstoque(Integer qtdEstoque) {
 		this.qtdEstoque = qtdEstoque;
 	}
+
 
 	public LocalDate getDataCadastro() {
 		return dataCadastro;
 	}
 
+
 	public void setDataCadastro(LocalDate dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public Float getValorUnitario() {
-		return valorUnitario;
+
+	public Float getValorCompra() {
+		return valorCompra;
 	}
 
-	public void setValorUnitario(Float valorUnitario) {
-		this.valorUnitario = valorUnitario;
+
+	public void setValorCompra(Float valorCompra) {
+		this.valorCompra = valorCompra;
 	}
 
-	public byte[] getImagem() {
+
+	public Float getValorAluguel() {
+		return valorAluguel;
+	}
+
+
+	public void setValorAluguel(Float valorAluguel) {
+		this.valorAluguel = valorAluguel;
+	}
+
+
+	public String getImagem() {
 		return imagem;
 	}
 
-	public void setImagem(byte[] imagem) {
+
+	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
+
+
+	public String getImagemFundo() {
+		return imagemFundo;
+	}
+
+
+	public void setImagemFundo(String imagemFundo) {
+		this.imagemFundo = imagemFundo;
+	}
+
 
 	public Categoria getCategoria() {
 		return categoria;
 	}
 
+
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(imagem);
-		result = prime * result + Objects.hash(categoria, dataCadastro, descricao, id, nome, qtdEstoque, valorUnitario);
-		return result;
+		return Objects.hash(categoria, dataCadastro, descricao, id, imagem, imagemFundo, nome, qtdEstoque, valorAluguel,
+				valorCompra);
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -165,9 +207,16 @@ public class Produto {
 		Produto other = (Produto) obj;
 		return Objects.equals(categoria, other.categoria) && Objects.equals(dataCadastro, other.dataCadastro)
 				&& Objects.equals(descricao, other.descricao) && Objects.equals(id, other.id)
-				&& Arrays.equals(imagem, other.imagem) && Objects.equals(nome, other.nome)
-				&& Objects.equals(qtdEstoque, other.qtdEstoque) && Objects.equals(valorUnitario, other.valorUnitario);
+				&& Objects.equals(imagem, other.imagem) && Objects.equals(imagemFundo, other.imagemFundo)
+				&& Objects.equals(nome, other.nome) && Objects.equals(qtdEstoque, other.qtdEstoque)
+				&& Objects.equals(valorAluguel, other.valorAluguel) && Objects.equals(valorCompra, other.valorCompra);
 	}
+
+
+	
+
+
+	
 	
 	
 }
